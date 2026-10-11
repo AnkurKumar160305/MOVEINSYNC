@@ -99,22 +99,22 @@ export const Simulator: React.FC = () => {
     <div className="space-y-8 pb-12">
       {/* Page Header */}
       <div>
-        <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+        <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
           Commute Solution Simulator & Experiments
         </h2>
-        <p className="text-sm text-slate-400">
+        <p className="text-xs sm:text-sm text-slate-400">
           Model expected Play Store rating lift and SLA recoveries prior to committing engineering resources
         </p>
       </div>
 
       {/* Simulator Interactive Cockpit */}
-      <div className="glass-card rounded-2xl p-6 border border-slate-800 bg-gradient-to-br from-slate-900 via-indigo-950/20 to-slate-950">
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+      <div className="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 bg-gradient-to-br from-slate-900 via-indigo-950/20 to-slate-950">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-5 sm:gap-6 pb-6 border-b border-slate-800">
           <div className="space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
               <Zap className="w-4 h-4" /> Interactive Rating Lift Engine
             </span>
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-base sm:text-lg font-bold text-white">
               Simulate Cumulative Impact of Proposed Architectural Fixes
             </h3>
             <p className="text-xs text-slate-400">
@@ -122,34 +122,34 @@ export const Simulator: React.FC = () => {
             </p>
           </div>
 
-          {/* Impact Comparison Cards */}
-          <div className="flex items-center gap-4">
-            <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-center min-w-[120px]">
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">
+          {/* Impact Comparison Cards (Responsive on Mobile) */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2 sm:gap-4">
+            <div className="p-3 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-center flex-1 sm:flex-initial min-w-[95px] sm:min-w-[120px]">
+              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">
                 Current Rating
               </span>
-              <span className="text-2xl font-black text-rose-400">⭐ {baseRating}</span>
-              <span className="text-[10px] text-slate-500 block">Baseline</span>
+              <span className="text-xl sm:text-2xl font-black text-rose-400">⭐ {baseRating}</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-500 block">Baseline</span>
             </div>
 
-            <div className="text-indigo-400 font-bold text-lg">→</div>
+            <div className="text-indigo-400 font-bold text-base sm:text-lg hidden sm:block">→</div>
 
-            <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-950/80 to-slate-900 border border-indigo-500/40 text-center min-w-[140px] shadow-lg shadow-indigo-600/20">
-              <span className="text-[10px] text-indigo-300 uppercase tracking-wider font-bold block">
+            <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-br from-indigo-950/80 to-slate-900 border border-indigo-500/40 text-center flex-1 sm:flex-initial min-w-[110px] sm:min-w-[140px] shadow-lg shadow-indigo-600/20">
+              <span className="text-[9px] sm:text-[10px] text-indigo-300 uppercase tracking-wider font-bold block">
                 Projected Rating
               </span>
-              <span className="text-2xl font-black text-emerald-400">⭐ {projectedRating}</span>
-              <span className="text-[10px] text-emerald-400 font-semibold block">
+              <span className="text-xl sm:text-2xl font-black text-emerald-400">⭐ {projectedRating}</span>
+              <span className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold block">
                 +{Math.round(currentImpact * 100) / 100} Stars Lift
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-center min-w-[120px]">
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">
+            <div className="p-3 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-center flex-1 sm:flex-initial min-w-[95px] sm:min-w-[120px]">
+              <span className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">
                 Complaints
               </span>
-              <span className="text-2xl font-black text-cyan-400">-{totalComplaintDrop}%</span>
-              <span className="text-[10px] text-slate-400 block">Volume Reduction</span>
+              <span className="text-xl sm:text-2xl font-black text-cyan-400">-{totalComplaintDrop}%</span>
+              <span className="text-[9px] sm:text-[10px] text-slate-400 block">Reduction</span>
             </div>
           </div>
         </div>

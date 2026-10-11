@@ -45,19 +45,19 @@ export const AIAssistant: React.FC = () => {
   return (
     <div className="space-y-6 pb-12 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
+      <div className="text-center space-y-1.5 sm:space-y-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[11px] sm:text-xs font-semibold">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Grounded Commute Intelligence Engine</span>
         </div>
-        <h2 className="text-3xl font-black text-white tracking-tight">Ask Pulse AI</h2>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Ask Pulse AI</h2>
+        <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto px-2">
           Query review sentiment and root causes with strict evidence grounding and citation support
         </p>
       </div>
 
       {/* Query Bar */}
-      <div className="glass-card rounded-2xl p-4 border border-slate-800 space-y-4 shadow-xl">
+      <div className="glass-card rounded-2xl p-3.5 sm:p-4 border border-slate-800 space-y-3 sm:space-y-4 shadow-xl">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -66,19 +66,19 @@ export const AIAssistant: React.FC = () => {
           className="flex gap-2"
         >
           <div className="relative flex-1">
-            <Bot className="w-5 h-5 text-indigo-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Ask anything about employee commute feedback (e.g. 'Why do night shift workers complain?')..."
+              placeholder="Ask anything about employee commute feedback..."
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-slate-900 border border-slate-800 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
             />
           </div>
           <button
             type="submit"
             disabled={loading || !question.trim()}
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-2"
+            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5 sm:gap-2 flex-shrink-0"
           >
             {loading ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

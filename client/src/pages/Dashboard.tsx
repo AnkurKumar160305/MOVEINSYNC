@@ -92,24 +92,24 @@ export const Dashboard: React.FC = () => {
       {/* Top Banner & Control Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
             Executive Summary & Rating Health
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-400">
             Real-time synthesis of employee sentiment, shift commute friction, and Play Store ratings
           </p>
         </div>
 
         {/* Platform filter tabs */}
-        <div className="flex items-center gap-2 p-1 bg-slate-900/90 rounded-xl border border-slate-800 text-xs self-start md:self-auto">
-          <span className="text-slate-400 px-2 flex items-center gap-1 font-medium">
+        <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800 text-xs w-full sm:w-auto">
+          <span className="text-slate-400 px-2 flex items-center gap-1 font-medium hidden sm:inline-flex">
             <Filter className="w-3.5 h-3.5" /> Platform:
           </span>
           {['all', 'google_play', 'app_store'].map((p) => (
             <button
               key={p}
               onClick={() => setPlatform(p)}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
+              className={`flex-1 sm:flex-initial px-2.5 sm:px-3 py-1.5 rounded-lg font-medium text-[11px] sm:text-xs transition-all text-center ${
                 platform === p
                   ? 'bg-indigo-600 text-white shadow-sm'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -122,7 +122,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <MetricCard
           title="Average App Rating"
           value={summary ? `${summary.averageRating} / 5.0` : '—'}

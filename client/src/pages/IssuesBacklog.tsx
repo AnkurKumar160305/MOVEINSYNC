@@ -64,50 +64,50 @@ export const IssuesBacklog: React.FC = () => {
   return (
     <div className="space-y-6 pb-12">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
             Prioritized Problem Space & Issues
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-400">
             Ranked root causes derived from Play Store feedback with composite scoring model
           </p>
         </div>
 
         <button
           onClick={() => navigate('/tasks')}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/30 self-start sm:self-auto"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/30 self-start sm:self-auto"
         >
           <ListTodo className="w-4 h-4" />
-          <span>View Engineering Task Board</span>
+          <span>View Task Board</span>
         </button>
       </div>
 
       {/* Priority Scoring Methodology Explainer */}
-      <div className="glass-card rounded-2xl p-5 border border-slate-800 bg-gradient-to-r from-slate-900 via-indigo-950/20 to-slate-900">
+      <div className="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 bg-gradient-to-r from-slate-900 via-indigo-950/20 to-slate-900">
         <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-2 flex items-center gap-1.5">
           <Activity className="w-4 h-4" />
           <span>Weighted FDE Priority Scoring Formula (0 - 100)</span>
         </h4>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs">
-          <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
-            <span className="text-slate-400 block text-[11px]">Severity Impact</span>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3 text-xs">
+          <div className="p-2 sm:p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <span className="text-slate-400 block text-[10px] sm:text-[11px]">Severity Impact</span>
             <span className="font-bold text-rose-400">30% Weight</span>
           </div>
-          <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
-            <span className="text-slate-400 block text-[11px]">Complaint Frequency</span>
+          <div className="p-2 sm:p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <span className="text-slate-400 block text-[10px] sm:text-[11px]">Complaint Frequency</span>
             <span className="font-bold text-amber-400">25% Weight</span>
           </div>
-          <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
-            <span className="text-slate-400 block text-[11px]">Commute SLA Risk</span>
+          <div className="p-2 sm:p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <span className="text-slate-400 block text-[10px] sm:text-[11px]">Commute SLA Risk</span>
             <span className="font-bold text-cyan-400">20% Weight</span>
           </div>
-          <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
-            <span className="text-slate-400 block text-[11px]">Recent Trend Velocity</span>
+          <div className="p-2 sm:p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <span className="text-slate-400 block text-[10px] sm:text-[11px]">Recent Trend Velocity</span>
             <span className="font-bold text-purple-400">15% Weight</span>
           </div>
-          <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
-            <span className="text-slate-400 block text-[11px]">Data Confidence</span>
+          <div className="col-span-2 sm:col-span-1 p-2 sm:p-2.5 rounded-lg bg-slate-950/60 border border-slate-800/80">
+            <span className="text-slate-400 block text-[10px] sm:text-[11px]">Data Confidence</span>
             <span className="font-bold text-emerald-400">10% Weight</span>
           </div>
         </div>
@@ -132,13 +132,13 @@ export const IssuesBacklog: React.FC = () => {
               >
                 {/* Header row */}
                 <div
-                  className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer"
+                  className="p-4 sm:p-5 flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
                   onClick={() => setExpandedIssueId(isExpanded ? null : issue.issueId)}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 sm:gap-4 flex-1">
                     {/* Score badge */}
                     <div
-                      className={`flex flex-col items-center justify-center w-14 h-14 rounded-2xl border flex-shrink-0 font-extrabold ${getScoreColor(
+                      className={`flex flex-col items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border flex-shrink-0 font-extrabold ${getScoreColor(
                         issue.priorityScore
                       )}`}
                     >

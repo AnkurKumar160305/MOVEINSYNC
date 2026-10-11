@@ -79,6 +79,8 @@ export const TaskBoard: React.FC = () => {
     }
   };
 
+  const [mobileActiveLane, setMobileActiveLane] = useState<string>('all');
+
   const columns: { id: TaskStatus; label: string; dotColor: string }[] = [
     { id: 'backlog', label: 'Sprint Backlog', dotColor: 'bg-indigo-400' },
     { id: 'in_progress', label: 'In Progress (Active Dev)', dotColor: 'bg-amber-400' },
@@ -89,23 +91,54 @@ export const TaskBoard: React.FC = () => {
   return (
     <div className="space-y-6 pb-12">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
             Forward Deployed Engineering Task Board
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-400">
             Sprint-ready engineering tasks linked directly to Play Store customer pain points
           </p>
         </div>
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/30 self-start sm:self-auto"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/30 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
-          <span>New Engineering Task</span>
+          <span>New Task</span>
         </button>
+      </div>
+
+      {/* Mobile Lane Selector Tabs (Visible on Android / mobile only) */}
+      <div className="flex md:hidden items-center gap-1.5 overflow-x-auto pb-1 -mx-2 px-2 scrollbar-none">
+        <button
+          onClick={() => setMobileActiveLane('all')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+            mobileActiveLane === 'all'
+              ? 'bg-indigo-600 text-white'
+              : 'bg-slate-900 border border-slate-800 text-slate-400'
+          }`}
+        >
+          All Lanes ({tasks.length})
+        </button>
+        {columns.map((col) => {
+          const count = tasks.filter((t) => t.status === col.id).length;
+          return (
+            <button
+              key={col.id}
+              onClick={() => setMobileActiveLane(col.id)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                mobileActiveLane === col.id
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-slate-900 border border-slate-800 text-slate-400'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${col.dotColor}`}></span>
+              <span>{col.label.split(' ')[0]} ({count})</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Kanban Board Columns */}
@@ -115,15 +148,17 @@ export const TaskBoard: React.FC = () => {
           <p className="text-xs text-slate-400">Loading task pipeline...</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-          {columns.map((col) => {
-            const colTasks = tasks.filter((t) => t.status === col.id);
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+          {columns
+            .filter((col) => mobileActiveLane === 'all' || mobileActiveLane === col.id)
+            .map((col) => {
+              const colTasks = tasks.filter((t) => t.status === col.id);
 
-            return (
-              <div
-                key={col.id}
-                className="glass-card rounded-2xl p-4 border border-slate-800 flex flex-col min-h-[550px]"
-              >
+              return (
+                <div
+                  key={col.id}
+                  className="glass-card rounded-2xl p-4 border border-slate-800 flex flex-col min-h-[400px] sm:min-h-[550px]"
+                >
                 {/* Column header */}
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
                   <div className="flex items-center gap-2">

@@ -48,19 +48,19 @@ export const ExecutiveReport: React.FC = () => {
   return (
     <div className="space-y-8 pb-16 max-w-4xl mx-auto">
       {/* Action Header */}
-      <div className="flex items-center justify-between no-print">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 no-print">
         <div>
-          <h2 className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
             Executive Briefing Report
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-slate-400">
             Candidate assignment synthesis prepared for MoveInSync Product & Engineering Leadership
           </p>
         </div>
 
         <button
           onClick={handlePrint}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md self-start sm:self-auto"
         >
           <Printer className="w-4 h-4" />
           <span>Print / Save as PDF</span>
@@ -68,19 +68,19 @@ export const ExecutiveReport: React.FC = () => {
       </div>
 
       {/* Printable Report Document Card */}
-      <div className="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-700/80 space-y-8 bg-slate-950/80 shadow-2xl print:bg-white print:text-black print:border-none print:shadow-none print:p-0">
+      <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 border border-slate-700/80 space-y-6 sm:space-y-8 bg-slate-950/80 shadow-2xl print:bg-white print:text-black print:border-none print:shadow-none print:p-0">
         {/* Document Title Header */}
-        <div className="border-b border-slate-800 pb-6 print:border-black/20">
-          <div className="flex justify-between items-start">
+        <div className="border-b border-slate-800 pb-5 sm:pb-6 print:border-black/20">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-4">
             <div>
-              <span className="text-xs uppercase font-extrabold tracking-widest text-indigo-400 print:text-indigo-700 block mb-1">
+              <span className="text-[10px] sm:text-xs uppercase font-extrabold tracking-widest text-indigo-400 print:text-indigo-700 block mb-1">
                 MoveInSync Pulse • Forward Deployed Engineering Assignment
               </span>
-              <h1 className="text-3xl font-black text-white print:text-black tracking-tight">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-white print:text-black tracking-tight leading-snug">
                 Play Store Rating Root-Cause Investigation & Reliability Roadmap
               </h1>
             </div>
-            <div className="text-right text-xs text-slate-400 print:text-slate-600">
+            <div className="text-left sm:text-right text-xs text-slate-400 print:text-slate-600">
               <p>Generated: {new Date().toLocaleDateString()}</p>
               <p className="font-semibold text-slate-300 print:text-slate-900">Confidential / Internal</p>
             </div>

@@ -9,11 +9,17 @@ import {
   Bot,
   Database,
   FileText,
-  ChevronRight,
   TrendingUp,
+  X,
+  Activity,
 } from 'lucide-react';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   const navItems = [
     {
       to: '/',
@@ -71,8 +77,12 @@ export const Sidebar: React.FC = () => {
     },
   ];
 
-  return (
-    <aside className="w-64 flex-shrink-0 min-h-[calc(100vh-4rem)] glass-panel border-r border-slate-800/80 p-4 flex flex-col justify-between">
+  const handleLinkClick = () => {
+    if (onClose) onClose();
+  };
+
+  const navContent = (
+    <div className="flex flex-col justify-between h-full space-y-6">
       <div className="space-y-6">
         {/* Navigation Category: Intelligence */}
         <div>
@@ -86,6 +96,7 @@ export const Sidebar: React.FC = () => {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  onClick={handleLinkClick}
                   className={({ isActive }) =>
                     `group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       isActive
@@ -99,7 +110,11 @@ export const Sidebar: React.FC = () => {
                     <span>{item.label}</span>
                   </div>
                   {item.badge && (
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${item.badgeColor || 'bg-slate-800 text-slate-300'}`}>
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        item.badgeColor || 'bg-slate-800 text-slate-300'
+                      }`}
+                    >
                       {item.badge}
                     </span>
                   )}
@@ -121,6 +136,7 @@ export const Sidebar: React.FC = () => {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  onClick={handleLinkClick}
                   className={({ isActive }) =>
                     `group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       isActive
@@ -134,7 +150,11 @@ export const Sidebar: React.FC = () => {
                     <span>{item.label}</span>
                   </div>
                   {item.badge && (
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${item.badgeColor || 'bg-slate-800 text-slate-300'}`}>
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        item.badgeColor || 'bg-slate-800 text-slate-300'
+                      }`}
+                    >
                       {item.badge}
                     </span>
                   )}
@@ -146,7 +166,7 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Candidate Assignment Context Card */}
-      <div className="mt-6 p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
+      <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
         <div className="flex items-center gap-2 text-indigo-400 font-semibold mb-1">
           <TrendingUp className="w-4 h-4" />
           <span>FDE Objective</span>
@@ -155,6 +175,47 @@ export const Sidebar: React.FC = () => {
           Diagnosing negative Play Store ratings across booking, GPS, and pickup stages to deliver prioritized engineering action items.
         </p>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar (hidden on mobile, visible on md+) */}
+      <aside className="hidden md:flex w-64 flex-shrink-0 min-h-[calc(100vh-4rem)] glass-panel border-r border-slate-800/80 p-4 flex-col justify-between">
+        {navContent}
+      </aside>
+
+      {/* Mobile Drawer Slide-over (visible on small devices when isOpen is true) */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 md:hidden animate-in fade-in duration-200">
+          {/* Backdrop blur */}
+          <div
+            onClick={onClose}
+            className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+          />
+
+          {/* Drawer Panel */}
+          <div className="fixed top-0 bottom-0 left-0 z-50 w-72 max-w-[85vw] bg-slate-950 border-r border-slate-800 p-4 flex flex-col justify-between overflow-y-auto shadow-2xl animate-in slide-in-from-left duration-300">
+            {/* Header with Close Button */}
+            <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-800/80">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center">
+                  <Activity className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-bold text-white text-sm">MoveInSync Pulse</span>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {navContent}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
