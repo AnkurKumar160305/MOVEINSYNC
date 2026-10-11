@@ -89,3 +89,38 @@ Open `http://localhost:5173/` in your browser.
 
 - **Automated Backend Tests**: `npm test` runs 9 comprehensive test suites covering Health, Dashboard KPIs, Paginated Reviews, Issues, Task Generation, and Classification Services.
 - **Browser Automation Verification**: Verified via subagent recording (`moveinsync_pulse_demo.webp`).
+
+---
+
+## 🌐 Deployment Guide
+
+### Option 1: 1-Click All-in-One Deployment on Render (Recommended, Free)
+
+1. Sign up/log in at [render.com](https://render.com).
+2. Click **New +** → **Web Service**.
+3. Connect your GitHub repository `https://github.com/AnkurKumar160305/MOVEINSYNC`.
+4. Configure settings:
+   - **Environment**: `Node`
+   - **Build Command**: `npm run install:all && npm run build`
+   - **Start Command**: `npm start`
+5. Click **Deploy Web Service**.
+> The unified server automatically builds the React SPA and serves it along with the API on a single URL without CORS issues!
+
+---
+
+### Option 2: Split Deployment (Vercel Frontend + Render Backend)
+
+#### A. Deploy Backend on Render:
+1. Create a **Web Service** pointing to repository `MOVEINSYNC`.
+2. Set **Root Directory**: `server`
+3. Set **Build Command**: `npm install && npm run build`
+4. Set **Start Command**: `npm start`
+5. Copy your Render backend URL (e.g., `https://moveinsync-pulse-api.onrender.com`).
+
+#### B. Deploy Frontend on Vercel:
+1. Go to [vercel.com](https://vercel.com) and import the repository.
+2. Set **Root Directory**: `client`
+3. In **Environment Variables**, add:
+   - `VITE_API_BASE_URL` = `https://your-backend.onrender.com/api`
+4. Click **Deploy**.
+

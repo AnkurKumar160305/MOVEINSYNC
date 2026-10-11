@@ -12,8 +12,10 @@ import {
   IExecutiveReport,
 } from '../types';
 
+const apiBase = import.meta.env.VITE_API_BASE_URL || '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: apiBase,
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
@@ -157,7 +159,7 @@ export const pulseApi = {
   },
 
   getExportReviewsUrl() {
-    return '/api/exports/reviews';
+    return `${apiBase.replace(/\/$/, '')}/exports/reviews`;
   },
 };
 
